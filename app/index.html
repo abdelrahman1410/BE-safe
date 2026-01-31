@@ -28,4 +28,126 @@
 
     body{
       margin:0;
+      font-family: Arial, Helvetica, sans-serif;
+      background:var(--bg);
+      color:var(--text);
+      line-height:1.7;
+    }
+
+    header{
+      padding:20px 16px;
+      text-align:center;
+      border-bottom:1px solid rgba(255,255,255,.08);
+    }
+
+    header h1{
+      margin:0;
+      font-size:22px;
+      letter-spacing:1px;
+    }
+
+    header p{
+      margin:6px 0 0;
+      color:var(--muted);
+      font-size:13px;
+    }
+
+    main{
+      max-width:900px;
+      margin:auto;
+      padding:16px;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+      gap:14px;
+      margin-top:10px;
+    }
+
+    .card{
+      background:var(--card);
+      border-radius:16px;
+      padding:18px;
+      border:1px solid rgba(255,255,255,.08);
+      transition:.2s;
+    }
+
+    .card:hover{
+      transform:translateY(-2px);
+      border-color:var(--accent);
+    }
+
+    .card h3{
+      margin:0 0 8px;
+      font-size:16px;
+    }
+
+    .card p{
+      margin:0;
+      font-size:13px;
+      color:var(--muted);
+    }
+
+    footer{
+      text-align:center;
+      padding:20px 12px;
+      font-size:12px;
+      color:var(--muted);
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h1>BE SAFE</h1>
+  <p>Health, Safety & Environment</p>
+</header>
+
+<main>
+  <div class="grid">
+    <div class="card">
+      <h3>🛠️ Safety Services</h3>
+      <p>HSE Audits, Training & Consultancy</p>
+    </div>
+
+    <div class="card">
+      <h3>📚 Safety Library</h3>
+      <p>PTW, JSA, Risk Assessment & Checklists</p>
+    </div>
+
+    <div class="card">
+      <h3>🧮 Risk Tools</h3>
+      <p>Risk Matrix & Safety Calculators</p>
+    </div>
+
+    <div class="card">
+      <h3>📞 Request Service</h3>
+      <p>Contact & WhatsApp Requests</p>
+    </div>
+  </div>
+</main>
+
+<footer>
+  © BE SAFE – Safety Solutions
+</footer>
+
+<!-- Service Worker -->
+<script>
+  if ("serviceWorker" in navigator) {
+    window.addEventListener("load", function () {
+      navigator.serviceWorker.register("./sw.js")
+        .then(() => console.log("Service Worker Registered"))
+        .catch(err => console.log("Service Worker failed:", err));
+    });
+  }
+</script>
+
+</body>
+</html>
+
+    body{
+      margin:0;
       font-family:Arial, Helvet
+
