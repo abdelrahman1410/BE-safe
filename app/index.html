@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>BE SAFE | Safety App</title>
+<link rel="manifest" href="./manifest.json">
+<meta name="theme-color" content="#0b1220">
+
+  <style>
+    body{
+      margin:0;
+      font-family:Arial;
+      background:#0b1220;
+      color:#fff;
+      line-height:1.8;
+      text-align:center;
+    }
+    .wrap{
+      max-width:700px;
+      margin:auto;
+      padding:40px 16px;
+    }
+    .card{
+      background:#101a33;
+      padding:24px;
+      border-radius:16px;
+      margin-top:20px;
+    }
+    .btn{
+      display:inline-block;
+      margin-top:16px;
+      padding:12px 18px;
+      background:#00d1b2;
+      color:#000;
+      border-radius:12px;
+      font-weight:bold;
+      text-decoration:none;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="wrap">
+    <h1>BE SAFE</h1>
+    <p>Safety Web App</p>
+
+    <div class="card">
+      <p>
+        ده أول إصدار من أبلكيشن السلامة  
+        هيشتغل على الموبايل ويتثبت كأنه App
+      </p>
+
+      <a class="btn" href="#">Safety Services</a>
+    </div>
+  </div>
+<script>
+  if ("serviceWorker" in navigator) {
+    navigator.serviceWorker.register("./sw.js");
+  }
+</script>
+
+</body>
+</html>
