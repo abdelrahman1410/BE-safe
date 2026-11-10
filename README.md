@@ -9,8 +9,9 @@
 | `index.html` | Home page |
 | `services/` | Safety services (audits, training, consultancy) |
 | `library/` | Safety library (PTW, JSA, checklists) |
-| `tools/` | Risk tools (risk matrix, KPIs, calculators) |
-| `request/` | Request a service via WhatsApp |
+| `tools/` | Interactive 5×5 risk matrix and safety KPI calculator (TRIR, LTIFR, severity rate) |
+| `request/` | Request form that sends the details on WhatsApp |
+| `assets/` | Shared design (`style.css`) and header, footer and Arabic/English switch (`site.js`) |
 | `app/` | Installable mobile app (PWA): `manifest.json`, `sw.js`, icons |
 | `docs/` | Alternative version of the site with a shared stylesheet |
 
