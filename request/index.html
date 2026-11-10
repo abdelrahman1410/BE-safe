@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Request a Service | BE SAFE</title>
-  <meta name="description" content="Request HSE audits, training, documentation or on-site support from BE SAFE via WhatsApp.">
+  <title>Get in Touch | BE SAFE</title>
+  <meta name="description" content="Contact Abdul Rahman Zain for professional HSE inquiries, opportunities or free templates.">
   <meta name="theme-color" content="#0b1f3a">
   <link rel="icon" href="../app/icons/icon-192-v2.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -18,9 +18,9 @@
 <main>
   <div class="page-hero">
     <div class="container">
-      <h1><span data-l="en">Request a Service</span><span data-l="ar">اطلب خدمة</span></h1>
-      <p data-l="en">Fill in the form and send it to us on WhatsApp. We'll reply as soon as possible.</p>
-      <p data-l="ar">املأ النموذج وأرسله لنا عبر واتساب، وسنرد عليك في أقرب وقت.</p>
+      <h1><span data-l="en">Get in Touch</span><span data-l="ar">تواصل معي</span></h1>
+      <p data-l="en">For professional inquiries, opportunities, free templates or a question about HSE. Your message goes straight to me on WhatsApp.</p>
+      <p data-l="ar">للاستفسارات المهنية أو الفرص أو طلب النماذج المجانية أو أي سؤال في السلامة. رسالتك تصلني مباشرة عبر واتساب.</p>
     </div>
   </div>
 
@@ -35,32 +35,27 @@
               <input id="name" required autocomplete="name">
             </div>
             <div class="field">
-              <label for="company"><span data-l="en">Company</span><span data-l="ar">الشركة</span></label>
+              <label for="company"><span data-l="en">Company / organization</span><span data-l="ar">الشركة / الجهة</span></label>
               <input id="company" autocomplete="organization">
-            </div>
-            <div class="field">
-              <label for="service"><span data-l="en">Service needed *</span><span data-l="ar">الخدمة المطلوبة *</span></label>
-              <select id="service" required>
-                <option value="" data-en="Choose a service" data-ar="اختر الخدمة"></option>
-                <option data-en="HSE Audit / Inspection" data-ar="تدقيق / تفتيش السلامة"></option>
-                <option data-en="Safety Training" data-ar="تدريب السلامة"></option>
-                <option data-en="HSE Documentation" data-ar="مستندات السلامة"></option>
-                <option data-en="On-site HSE Support" data-ar="دعم السلامة في الموقع"></option>
-                <option data-en="Templates from the Library" data-ar="نماذج من المكتبة"></option>
-                <option data-en="Other" data-ar="أخرى"></option>
-              </select>
-            </div>
-            <div class="field">
-              <label for="location"><span data-l="en">Project location</span><span data-l="ar">موقع المشروع</span></label>
-              <input id="location">
             </div>
           </div>
           <div class="field">
-            <label for="details"><span data-l="en">Project details</span><span data-l="ar">تفاصيل المشروع</span></label>
+            <label for="service"><span data-l="en">Subject *</span><span data-l="ar">الموضوع *</span></label>
+            <select id="service" required>
+              <option value="" data-en="Choose a subject" data-ar="اختر الموضوع"></option>
+              <option data-en="Professional inquiry" data-ar="استفسار مهني"></option>
+              <option data-en="Job or career opportunity" data-ar="فرصة عمل"></option>
+              <option data-en="Free template from the library" data-ar="نموذج مجاني من المكتبة"></option>
+              <option data-en="Question about the risk tools" data-ar="سؤال عن أدوات المخاطر"></option>
+              <option data-en="Other" data-ar="أخرى"></option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="details"><span data-l="en">Message</span><span data-l="ar">الرسالة</span></label>
             <textarea id="details"></textarea>
           </div>
           <p class="hint" id="formError" style="color:#c62828;display:none">
-            <span data-l="en">Please enter your name and choose a service.</span><span data-l="ar">من فضلك أدخل اسمك واختر الخدمة.</span>
+            <span data-l="en">Please enter your name and choose a subject.</span><span data-l="ar">من فضلك أدخل اسمك واختر الموضوع.</span>
           </p>
           <button class="btn btn-whatsapp" type="submit" id="sendBtn">
             <span data-l="en">Send on WhatsApp</span><span data-l="ar">إرسال عبر واتساب</span>
@@ -68,11 +63,22 @@
         </form>
 
         <div class="card">
-          <h3><span data-l="en">Contact directly</span><span data-l="ar">تواصل مباشرة</span></h3>
-          <p data-l="en">Prefer to chat? Message us on WhatsApp.</p>
-          <p data-l="ar">تفضّل المحادثة؟ راسلنا على واتساب.</p>
-          <p style="font-weight:700;color:var(--navy);margin-top:12px" dir="ltr">+966 53 985 2062</p>
-          <a class="btn btn-whatsapp" data-wa="" style="width:100%">WhatsApp</a>
+          <div style="display:flex;align-items:center;gap:14px;margin-bottom:14px">
+            <div class="avatar sm">AZ</div>
+            <div>
+              <h3 style="margin:0"><span data-l="en">Abdul Rahman Zain</span><span data-l="ar">عبدالرحمن زين</span></h3>
+              <div class="hint"><span data-l="en">Senior HSE Professional</span><span data-l="ar">أخصائي أول في السلامة</span></div>
+            </div>
+          </div>
+          <p data-l="en">You'll be talking to me directly.</p>
+          <p data-l="ar">ستتحدث معي مباشرة.</p>
+          <ul style="list-style:none;padding:0;margin:0 0 16px;color:var(--muted)">
+            <li dir="ltr" style="font-weight:700;color:var(--navy)">+966 53 985 2062</li>
+            <li><a href="mailto:abdelrahmanelsayed946@gmail.com" style="word-break:break-all">abdelrahmanelsayed946@gmail.com</a></li>
+            <li><span data-l="en">Buraydah, Qassim, Saudi Arabia</span><span data-l="ar">بريدة، القصيم، السعودية</span></li>
+          </ul>
+          <a class="btn btn-whatsapp" data-wa="" style="width:100%;margin-bottom:10px">WhatsApp</a>
+          <a class="btn btn-dark" id="liBtn" target="_blank" rel="noopener" style="width:100%">LinkedIn</a>
         </div>
 
       </div>
@@ -83,11 +89,10 @@
 <script src="../assets/site.js"></script>
 <script>
 (function () {
-  var sendBtn = document.getElementById("sendBtn");
-  sendBtn.insertAdjacentHTML("afterbegin", window.BESAFE_WA_ICON);
-  document.querySelectorAll('a.btn-whatsapp').forEach(function (a) { a.insertAdjacentHTML("afterbegin", window.BESAFE_WA_ICON); });
+  document.getElementById("sendBtn").insertAdjacentHTML("afterbegin", window.BESAFE_WA_ICON);
+  document.querySelectorAll("a.btn-whatsapp").forEach(function (a) { a.insertAdjacentHTML("afterbegin", window.BESAFE_WA_ICON); });
+  document.getElementById("liBtn").href = window.BESAFE_LINKEDIN;
 
-  // Translate select options
   function fillOptions() {
     var k = document.documentElement.lang === "ar" ? "ar" : "en";
     document.querySelectorAll("#service option").forEach(function (o) { o.textContent = o.getAttribute("data-" + k); });
@@ -95,9 +100,7 @@
   document.addEventListener("langchange", fillOptions);
   fillOptions();
 
-  var form = document.getElementById("requestForm");
-
-  form.addEventListener("submit", function (e) {
+  document.getElementById("requestForm").addEventListener("submit", function (e) {
     e.preventDefault();
     var v = function (id) { return document.getElementById(id).value.trim(); };
     var sel = document.getElementById("service");
@@ -105,15 +108,13 @@
     if (!v("name") || !sel.value) { err.style.display = "block"; return; }
     err.style.display = "none";
 
-    var service = sel.options[sel.selectedIndex].getAttribute("data-en");
     var lines = [
-      "Hello BE SAFE, I would like to request a service.",
+      "Hello Abdul Rahman,",
       "",
       "Name: " + v("name"),
       v("company") ? "Company: " + v("company") : "",
-      "Service: " + service,
-      v("location") ? "Location: " + v("location") : "",
-      v("details") ? "Details: " + v("details") : ""
+      "Subject: " + sel.options[sel.selectedIndex].getAttribute("data-en"),
+      v("details") ? "Message: " + v("details") : ""
     ].filter(function (x, i) { return x !== "" || i === 1; });
     window.open(window.waLink(lines.join("\n")), "_blank", "noopener");
   });
