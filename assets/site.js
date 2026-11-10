@@ -2,6 +2,9 @@
 // Each page sets <body data-page="home|services|library|tools|request" data-root="./" or "../">.
 (function () {
   var WHATSAPP = "966539852062";
+  var EMAIL = "abdelrahmanelsayed946@gmail.com";
+  var LINKEDIN = "https://www.linkedin.com/in/abdelrahman-zain-8b491613a";
+  window.BESAFE_LINKEDIN = LINKEDIN;
   window.BESAFE_WHATSAPP = WHATSAPP;
 
   var body = document.body;
@@ -23,7 +26,8 @@
 
   var links = [
     ["home", "", "Home", "الرئيسية"],
-    ["services", "services/", "Services", "الخدمات"],
+    ["about", "about/", "About", "من أنا"],
+    ["services", "services/", "Expertise", "الخبرات"],
     ["library", "library/", "Library", "المكتبة"],
     ["tools", "tools/", "Risk Tools", "أدوات المخاطر"],
     ["request", "request/", "Contact", "تواصل معنا"]
@@ -56,8 +60,8 @@
     "<div>" +
     '<a class="brand" href="' + root + '"><img src="' + root + 'app/icons/icon-192-v2.png" alt="">BE SAFE</a>' +
     "<p>" + t(
-      "Health, Safety &amp; Environment services for construction and industrial projects.",
-      "خدمات الصحة والسلامة والبيئة لمشاريع الإنشاءات والصناعة."
+      "Practical HSE tools, templates and know-how by Abdul Rahman Zain, Senior HSE Professional.",
+      "أدوات ونماذج ومعرفة عملية في السلامة المهنية من عبدالرحمن زين، أخصائي أول في الصحة والسلامة والبيئة."
     ) + "</p></div>" +
     "<div><h4>" + t("Pages", "الصفحات") + "</h4><ul>" +
     links.map(function (l) { return '<li><a href="' + root + l[1] + '">' + t(l[2], l[3]) + "</a></li>"; }).join("") +
@@ -65,9 +69,12 @@
     "</ul></div>" +
     "<div><h4>" + t("Contact", "تواصل") + "</h4><ul>" +
     '<li><a href="' + window.waLink() + '" target="_blank" rel="noopener">WhatsApp: <span dir="ltr">+' + WHATSAPP + "</span></a></li>" +
+    '<li><a href="mailto:' + EMAIL + '">' + EMAIL + "</a></li>" +
+    '<li><a href="' + LINKEDIN + '" target="_blank" rel="noopener">LinkedIn</a></li>' +
+    "<li>" + t("Buraydah, Qassim, Saudi Arabia", "بريدة، القصيم، المملكة العربية السعودية") + "</li>" +
     "</ul></div>" +
     "</div>" +
-    '<div class="copy">© ' + new Date().getFullYear() + " BE SAFE – " + t("Safety Solutions", "حلول السلامة") + "</div></div>";
+    '<div class="copy">© ' + new Date().getFullYear() + " BE SAFE · " + t("Abdul Rahman Zain", "عبدالرحمن زين") + "</div></div>";
   body.appendChild(footer);
 
   var wa = document.createElement("a");
