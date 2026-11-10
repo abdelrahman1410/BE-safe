@@ -2,83 +2,195 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>BE SAFE | Health, Safety & Environment</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <style>
-    .card{
-      display:block;
-      text-decoration:none;
-      color:inherit;
-      background:#101a33;
-      padding:22px;
-      border-radius:16px;
-      box-shadow:0 10px 25px rgba(0,0,0,.35);
-      border:1px solid transparent;
-      transition:.2s;
-    }
-    .card:hover{transform:translateY(-2px);border-color:#00d1b2}
-    .card p{opacity:.8}
-  </style>
+  <title>BE SAFE | Health, Safety & Environment</title>
+  <meta name="description" content="BE SAFE provides HSE services for construction and industrial projects: audits, training, documentation and site support.">
+  <meta name="theme-color" content="#0b1f3a">
+  <link rel="icon" href="app/icons/icon-192-v2.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/style.css">
+  <script>try{var l=localStorage.getItem("lang")}catch(e){}l=l||((navigator.language||"").indexOf("ar")===0?"ar":"en");document.documentElement.lang=l;document.documentElement.dir=l==="ar"?"rtl":"ltr";</script>
 </head>
+<body data-page="home" data-root="./">
 
-<body style="
-  margin:0;
-  font-family:Arial, sans-serif;
-  background:#0b1220;
-  color:#ffffff;
-">
-
-  <div style="
-    max-width:1000px;
-    margin:auto;
-    padding:40px 20px;
-    text-align:center
-  ">
-
-    <h1 style="margin-bottom:6px">BE SAFE</h1>
-    <p style="opacity:.85;margin-top:0">
-      Health, Safety & Environment
-    </p>
-
-    <!-- Main Cards -->
-    <div style="
-      display:grid;
-      grid-template-columns:repeat(auto-fit, minmax(220px, 1fr));
-      gap:16px;
-      margin-top:40px
-    ">
-
-      <!-- Safety Services -->
-      <a class="card" href="services/">
-        <h3>🛠 Safety Services</h3>
-        <p>Audits, Training & Consultancy</p>
-      </a>
-
-      <!-- Safety Library -->
-      <a class="card" href="library/">
-        <h3>📚 Safety Library</h3>
-        <p>PTW, JSA & Risk Assessment</p>
-      </a>
-
-      <!-- Risk Tools -->
-      <a class="card" href="tools/">
-        <h3>📊 Risk Tools</h3>
-        <p>Matrices & Calculators</p>
-      </a>
-
-      <!-- Request Service -->
-      <a class="card" href="request/">
-        <h3>📞 Request Service</h3>
-        <p>Contact & WhatsApp</p>
-      </a>
-
+<main>
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container">
+      <div>
+        <h1>
+          <span data-l="en">Safer sites.<br><span class="hl">Stronger teams.</span></span>
+          <span data-l="ar">مواقع عمل أكثر أمانًا<br><span class="hl">وفرق أقوى.</span></span>
+        </h1>
+        <p class="lead" data-l="en">BE SAFE provides Health, Safety &amp; Environment (HSE) services for construction and industrial projects: audits, training, documentation and on-site support.</p>
+        <p class="lead" data-l="ar">BE SAFE تقدّم خدمات الصحة والسلامة والبيئة (HSE) لمشاريع الإنشاءات والصناعة: تدقيق، تدريب، إعداد مستندات، ودعم في الموقع.</p>
+        <div class="actions">
+          <a class="btn btn-primary" href="request/">
+            <span data-l="en">Request a Service</span><span data-l="ar">اطلب خدمة</span>
+          </a>
+          <a class="btn btn-outline" href="services/">
+            <span data-l="en">Our Services</span><span data-l="ar">خدماتنا</span>
+          </a>
+        </div>
+        <div class="badges">
+          <span class="badge" data-l="en">ISO 45001 aligned</span><span class="badge" data-l="ar">متوافق مع ISO 45001</span>
+          <span class="badge" data-l="en">Construction &amp; Industrial</span><span class="badge" data-l="ar">إنشاءات وصناعة</span>
+          <span class="badge" data-l="en">Fast WhatsApp response</span><span class="badge" data-l="ar">رد سريع على واتساب</span>
+        </div>
+      </div>
+      <img class="hero-logo" src="app/icons/icon-512-v2.png" alt="BE SAFE">
     </div>
+  </section>
 
-    <p style="opacity:.65;font-size:14px;margin-top:40px">
-      © BE SAFE – Safety Solutions
-    </p>
+  <!-- Services -->
+  <section>
+    <div class="container">
+      <div class="section-head">
+        <div class="eyebrow"><span data-l="en">What we do</span><span data-l="ar">ماذا نقدّم</span></div>
+        <h2><span data-l="en">Complete HSE support for your project</span><span data-l="ar">دعم متكامل للسلامة في مشروعك</span></h2>
+        <p data-l="en">From the first site inspection to daily follow-up, we help you keep people safe and stay compliant.</p>
+        <p data-l="ar">من أول زيارة للموقع حتى المتابعة اليومية، نساعدك على حماية العاملين والالتزام بالمتطلبات.</p>
+      </div>
+      <div class="grid grid-4">
+        <a class="card" href="services/#audits">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="2" width="8" height="4" rx="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="m9 14 2 2 4-4"/></svg></div>
+          <h3><span data-l="en">HSE Audits</span><span data-l="ar">تدقيق السلامة</span></h3>
+          <p data-l="en">Site inspections, ISO 45001 gap analysis and compliance reviews.</p>
+          <p data-l="ar">تفتيش المواقع، تحليل الفجوات حسب ISO 45001، ومراجعة الالتزام.</p>
+        </a>
+        <a class="card" href="services/#training">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10 12 5 2 10l10 5 10-5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg></div>
+          <h3><span data-l="en">Safety Training</span><span data-l="ar">تدريب السلامة</span></h3>
+          <p data-l="en">Induction, toolbox talks and training for workers and supervisors.</p>
+          <p data-l="ar">التعريف بالموقع، محاضرات التوعية، وتدريب العمال والمشرفين.</p>
+        </a>
+        <a class="card" href="services/#documentation">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M8 13h8M8 17h8"/></svg></div>
+          <h3><span data-l="en">HSE Documentation</span><span data-l="ar">مستندات السلامة</span></h3>
+          <p data-l="en">HSE plans, risk assessments, method statements and procedures.</p>
+          <p data-l="ar">خطط السلامة، تقييم المخاطر، طرق التنفيذ، والإجراءات.</p>
+        </a>
+        <a class="card" href="services/#site-support">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 18h20"/><path d="M4 18v-2a8 8 0 0 1 16 0v2"/><path d="M10 8V5h4v3"/></svg></div>
+          <h3><span data-l="en">Site Support</span><span data-l="ar">دعم في الموقع</span></h3>
+          <p data-l="en">HSE officers, permit-to-work control and incident investigation.</p>
+          <p data-l="ar">مسؤولي سلامة، إدارة تصاريح العمل، والتحقيق في الحوادث.</p>
+        </a>
+      </div>
+    </div>
+  </section>
 
-  </div>
+  <!-- Why us -->
+  <section class="alt">
+    <div class="container">
+      <div class="section-head">
+        <div class="eyebrow"><span data-l="en">Why BE SAFE</span><span data-l="ar">لماذا BE SAFE</span></div>
+        <h2><span data-l="en">Practical safety that works on site</span><span data-l="ar">سلامة عملية تُطبَّق في الموقع</span></h2>
+      </div>
+      <div class="grid grid-4">
+        <div class="card">
+          <div class="icon navy"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg></div>
+          <h3><span data-l="en">Standards-based</span><span data-l="ar">مبني على المعايير</span></h3>
+          <p data-l="en">Our work follows recognized HSE standards such as ISO 45001.</p>
+          <p data-l="ar">نعمل وفق معايير السلامة المعتمدة مثل ISO 45001.</p>
+        </div>
+        <div class="card">
+          <div class="icon navy"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 18h20"/><path d="M4 18v-2a8 8 0 0 1 16 0v2"/><path d="M10 8V5h4v3"/></svg></div>
+          <h3><span data-l="en">Field experience</span><span data-l="ar">خبرة ميدانية</span></h3>
+          <p data-l="en">Solutions built for real construction and industrial sites, not just paperwork.</p>
+          <p data-l="ar">حلول مصممة لمواقع الإنشاءات والمصانع الفعلية، وليست مجرد أوراق.</p>
+        </div>
+        <div class="card">
+          <div class="icon navy"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M8 13h8M8 17h8"/></svg></div>
+          <h3><span data-l="en">Ready-to-use templates</span><span data-l="ar">نماذج جاهزة</span></h3>
+          <p data-l="en">PTW, JSA, checklists and forms you can start using right away.</p>
+          <p data-l="ar">تصاريح عمل، JSA، قوائم فحص ونماذج جاهزة للاستخدام فورًا.</p>
+        </div>
+        <div class="card">
+          <div class="icon navy"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-3.6-7.2L21 3v6h-6"/></svg></div>
+          <h3><span data-l="en">Fast response</span><span data-l="ar">استجابة سريعة</span></h3>
+          <p data-l="en">Reach us directly on WhatsApp and get a quick reply.</p>
+          <p data-l="ar">تواصل معنا مباشرة عبر واتساب واحصل على رد سريع.</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
+  <!-- How we work -->
+  <section>
+    <div class="container">
+      <div class="section-head">
+        <div class="eyebrow"><span data-l="en">How we work</span><span data-l="ar">طريقة العمل</span></div>
+        <h2><span data-l="en">Four simple steps</span><span data-l="ar">أربع خطوات بسيطة</span></h2>
+      </div>
+      <div class="grid grid-4 steps">
+        <div class="step">
+          <h3><span data-l="en">Contact us</span><span data-l="ar">تواصل معنا</span></h3>
+          <p class="hint" data-l="en">Tell us about your project and what you need.</p>
+          <p class="hint" data-l="ar">أخبرنا عن مشروعك واحتياجاتك.</p>
+        </div>
+        <div class="step">
+          <h3><span data-l="en">Site assessment</span><span data-l="ar">تقييم الموقع</span></h3>
+          <p class="hint" data-l="en">We review the site, the activities and the main hazards.</p>
+          <p class="hint" data-l="ar">نراجع الموقع والأنشطة وأهم المخاطر.</p>
+        </div>
+        <div class="step">
+          <h3><span data-l="en">Action plan</span><span data-l="ar">خطة عمل</span></h3>
+          <p class="hint" data-l="en">You get clear controls, documents and priorities.</p>
+          <p class="hint" data-l="ar">تحصل على إجراءات تحكم ومستندات وأولويات واضحة.</p>
+        </div>
+        <div class="step">
+          <h3><span data-l="en">Implement &amp; follow up</span><span data-l="ar">تنفيذ ومتابعة</span></h3>
+          <p class="hint" data-l="en">We support the team on site and track progress.</p>
+          <p class="hint" data-l="ar">ندعم الفريق في الموقع ونتابع التقدم.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Tools & Library -->
+  <section class="alt">
+    <div class="container">
+      <div class="section-head">
+        <div class="eyebrow"><span data-l="en">Free resources</span><span data-l="ar">أدوات مجانية</span></div>
+        <h2><span data-l="en">Tools and templates for your team</span><span data-l="ar">أدوات ونماذج لفريقك</span></h2>
+      </div>
+      <div class="grid grid-2">
+        <a class="card" href="tools/">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/><path d="M12 9v4M12 17h.01"/></svg></div>
+          <h3><span data-l="en">Risk Matrix &amp; Safety KPIs</span><span data-l="ar">مصفوفة المخاطر ومؤشرات السلامة</span></h3>
+          <p data-l="en">Rate any risk in seconds and calculate TRIR, LTIFR and severity rate.</p>
+          <p data-l="ar">قيّم أي خطر خلال ثوانٍ، واحسب TRIR وLTIFR ومعدل الخطورة.</p>
+          <span class="more"><span data-l="en">Open tools →</span><span data-l="ar">افتح الأدوات ←</span></span>
+        </a>
+        <a class="card" href="library/">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V2H6.5A2.5 2.5 0 0 0 4 4.5v15z"/><path d="M6.5 17A2.5 2.5 0 0 0 4 19.5 2.5 2.5 0 0 0 6.5 22H20v-5"/></svg></div>
+          <h3><span data-l="en">Safety Library</span><span data-l="ar">مكتبة السلامة</span></h3>
+          <p data-l="en">Permits to work, JSA, risk assessments, checklists and toolbox talks.</p>
+          <p data-l="ar">تصاريح العمل، JSA، تقييم المخاطر، قوائم الفحص ومحاضرات التوعية.</p>
+          <span class="more"><span data-l="en">Browse library →</span><span data-l="ar">تصفّح المكتبة ←</span></span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section>
+    <div class="container">
+      <div class="cta">
+        <div>
+          <h2><span data-l="en">Need HSE support for your project?</span><span data-l="ar">هل تحتاج إلى دعم في السلامة لمشروعك؟</span></h2>
+          <p data-l="en">Send us a message and we'll get back to you quickly.</p>
+          <p data-l="ar">أرسل لنا رسالة وسنرد عليك سريعًا.</p>
+        </div>
+        <a class="btn btn-dark" href="request/"><span data-l="en">Request a Service</span><span data-l="ar">اطلب خدمة</span></a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<script src="assets/site.js"></script>
 </body>
 </html>

@@ -2,36 +2,235 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Risk Tools | BE SAFE</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Free 5x5 risk matrix and safety KPI calculator (TRIR, LTIFR, severity rate).">
+  <meta name="theme-color" content="#0b1f3a">
+  <link rel="icon" href="../app/icons/icon-192-v2.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/style.css">
+  <script>try{var l=localStorage.getItem("lang")}catch(e){}l=l||((navigator.language||"").indexOf("ar")===0?"ar":"en");document.documentElement.lang=l;document.documentElement.dir=l==="ar"?"rtl":"ltr";</script>
 </head>
-<body style="margin:0;font-family:Arial;background:#0b1220;color:#fff">
+<body data-page="tools" data-root="../">
 
-  <div style="max-width:1000px;margin:auto;padding:30px">
-    <a href="../" style="color:#00d1b2;text-decoration:none;font-weight:bold">← Back</a>
-
-    <h1>Risk Tools</h1>
-    <p style="opacity:.85">Simple tools to support safety decisions</p>
-
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;margin-top:30px">
-
-      <div style="background:#101a33;padding:20px;border-radius:16px">
-        <h3>Risk Matrix</h3>
-        <p style="opacity:.8">Likelihood × Severity matrices for construction & industrial risks.</p>
-      </div>
-
-      <div style="background:#101a33;padding:20px;border-radius:16px">
-        <h3>Safety KPIs</h3>
-        <p style="opacity:.8">TRIR, LTIFR, Near Miss, Man-hours & incident tracking.</p>
-      </div>
-
-      <div style="background:#101a33;padding:20px;border-radius:16px">
-        <h3>Safety Calculators</h3>
-        <p style="opacity:.8">Quick calculators for rates, exposure & basic safety metrics.</p>
-      </div>
-
+<main>
+  <div class="page-hero">
+    <div class="container">
+      <h1><span data-l="en">Risk Tools</span><span data-l="ar">أدوات المخاطر</span></h1>
+      <p data-l="en">Free tools to support everyday safety decisions on site.</p>
+      <p data-l="ar">أدوات مجانية تساعدك في قرارات السلامة اليومية في الموقع.</p>
     </div>
   </div>
 
+  <!-- Risk matrix -->
+  <section>
+    <div class="container">
+      <div class="section-head">
+        <div class="eyebrow"><span data-l="en">Tool 1</span><span data-l="ar">الأداة 1</span></div>
+        <h2><span data-l="en">5×5 Risk Matrix</span><span data-l="ar">مصفوفة المخاطر 5×5</span></h2>
+        <p data-l="en">Choose the likelihood and severity, or tap a cell in the matrix. Risk score = Likelihood × Severity.</p>
+        <p data-l="ar">اختر الاحتمالية والشدة، أو اضغط على خانة في المصفوفة. درجة الخطر = الاحتمالية × الشدة.</p>
+      </div>
+
+      <div class="grid grid-2">
+        <div class="card">
+          <div class="field">
+            <label for="likelihood"><span data-l="en">Likelihood</span><span data-l="ar">الاحتمالية</span></label>
+            <select id="likelihood"></select>
+          </div>
+          <div class="field">
+            <label for="severity"><span data-l="en">Severity</span><span data-l="ar">الشدة</span></label>
+            <select id="severity"></select>
+          </div>
+          <div class="result" id="riskResult" aria-live="polite"></div>
+        </div>
+
+        <div class="card">
+          <div class="matrix-wrap">
+            <table class="matrix" id="matrix">
+              <caption class="hint" style="caption-side:bottom;padding-top:8px">
+                <span data-l="en">Rows: likelihood · Columns: severity</span><span data-l="ar">الصفوف: الاحتمالية · الأعمدة: الشدة</span>
+              </caption>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- KPI calculator -->
+  <section class="alt">
+    <div class="container">
+      <div class="section-head">
+        <div class="eyebrow"><span data-l="en">Tool 2</span><span data-l="ar">الأداة 2</span></div>
+        <h2><span data-l="en">Safety KPI Calculator</span><span data-l="ar">حاسبة مؤشرات السلامة</span></h2>
+        <p data-l="en">Enter your man-hours and incident numbers for the period to get your safety rates.</p>
+        <p data-l="ar">أدخل ساعات العمل وأعداد الحوادث للفترة لحساب معدلات السلامة.</p>
+      </div>
+
+      <div class="card">
+        <div class="fields-2">
+          <div class="field">
+            <label for="hours"><span data-l="en">Total man-hours worked</span><span data-l="ar">إجمالي ساعات العمل</span></label>
+            <input id="hours" type="number" min="0" step="1" inputmode="numeric" placeholder="500000">
+          </div>
+          <div class="field">
+            <label for="recordables"><span data-l="en">Recordable injuries</span><span data-l="ar">الإصابات المسجّلة</span></label>
+            <input id="recordables" type="number" min="0" step="1" inputmode="numeric" placeholder="0">
+          </div>
+          <div class="field">
+            <label for="lti"><span data-l="en">Lost time injuries (LTI)</span><span data-l="ar">إصابات فقدان وقت العمل (LTI)</span></label>
+            <input id="lti" type="number" min="0" step="1" inputmode="numeric" placeholder="0">
+          </div>
+          <div class="field">
+            <label for="days"><span data-l="en">Lost work days</span><span data-l="ar">أيام العمل المفقودة</span></label>
+            <input id="days" type="number" min="0" step="1" inputmode="numeric" placeholder="0">
+          </div>
+        </div>
+
+        <div class="kpis">
+          <div class="kpi"><div class="label">TRIR</div><div class="value" id="trir">–</div></div>
+          <div class="kpi"><div class="label">LTIFR</div><div class="value" id="ltifr">–</div></div>
+          <div class="kpi"><div class="label"><span data-l="en">Severity Rate</span><span data-l="ar">معدل الخطورة</span></div><div class="value" id="sr">–</div></div>
+        </div>
+
+        <p class="hint" style="margin-top:16px" data-l="en">
+          TRIR = recordable injuries × 200,000 ÷ man-hours ·
+          LTIFR = LTIs × 1,000,000 ÷ man-hours ·
+          Severity Rate = lost days × 200,000 ÷ man-hours.
+          Check which base (200,000 or 1,000,000) your client or authority uses.
+        </p>
+        <p class="hint" style="margin-top:16px" data-l="ar">
+          TRIR = الإصابات المسجّلة × 200,000 ÷ ساعات العمل ·
+          LTIFR = إصابات فقدان الوقت × 1,000,000 ÷ ساعات العمل ·
+          معدل الخطورة = الأيام المفقودة × 200,000 ÷ ساعات العمل.
+          تأكد من الأساس (200,000 أو 1,000,000) الذي يعتمده عميلك أو الجهة المختصة.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <div class="cta">
+        <div>
+          <h2><span data-l="en">Need a full risk assessment?</span><span data-l="ar">تحتاج تقييم مخاطر كامل؟</span></h2>
+          <p data-l="en">We prepare risk assessments and JSA for your actual site activities.</p>
+          <p data-l="ar">نُعدّ تقييم المخاطر وتحليل سلامة المهام لأنشطة موقعك الفعلية.</p>
+        </div>
+        <a class="btn btn-dark" href="../request/"><span data-l="en">Request a Service</span><span data-l="ar">اطلب خدمة</span></a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<script src="../assets/site.js"></script>
+<script>
+(function () {
+  var L = [
+    ["Rare", "نادر"],
+    ["Unlikely", "غير محتمل"],
+    ["Possible", "ممكن"],
+    ["Likely", "محتمل"],
+    ["Almost certain", "شبه مؤكد"]
+  ];
+  var S = [
+    ["Insignificant", "طفيفة جدًا"],
+    ["Minor", "بسيطة"],
+    ["Moderate", "متوسطة"],
+    ["Major", "كبيرة"],
+    ["Catastrophic", "كارثية"]
+  ];
+  var LEVELS = [
+    { max: 4,  cls: "lvl-low",  en: "Low",     ar: "منخفض",
+      actEn: "Acceptable. Manage with routine procedures and keep monitoring.",
+      actAr: "مقبول. يُدار بالإجراءات المعتادة مع استمرار المتابعة." },
+    { max: 9,  cls: "lvl-med",  en: "Medium",  ar: "متوسط",
+      actEn: "Tolerable. Add controls and have the supervisor review before work starts.",
+      actAr: "مقبول بشروط. أضف إجراءات تحكم وراجعها مع المشرف قبل بدء العمل." },
+    { max: 16, cls: "lvl-high", en: "High",    ar: "مرتفع",
+      actEn: "Do not start until the risk is reduced. Management approval required.",
+      actAr: "لا تبدأ العمل حتى يتم تقليل الخطر. يلزم اعتماد الإدارة." },
+    { max: 25, cls: "lvl-ext",  en: "Extreme", ar: "شديد جدًا",
+      actEn: "Unacceptable. Stop the activity and redesign the work.",
+      actAr: "غير مقبول. أوقف النشاط وأعد تصميم طريقة العمل." }
+  ];
+
+  function lang() { return document.documentElement.lang === "ar" ? 1 : 0; }
+  function level(score) { for (var i = 0; i < LEVELS.length; i++) if (score <= LEVELS[i].max) return LEVELS[i]; }
+
+  var lSel = document.getElementById("likelihood");
+  var sSel = document.getElementById("severity");
+  var table = document.getElementById("matrix");
+  var out = document.getElementById("riskResult");
+
+  function fillSelects() {
+    var k = lang(), lv = lSel.value || "3", sv = sSel.value || "3";
+    lSel.innerHTML = L.map(function (x, i) { return '<option value="' + (i + 1) + '">' + (i + 1) + " – " + x[k] + "</option>"; }).join("");
+    sSel.innerHTML = S.map(function (x, i) { return '<option value="' + (i + 1) + '">' + (i + 1) + " – " + x[k] + "</option>"; }).join("");
+    lSel.value = lv; sSel.value = sv;
+  }
+
+  function buildMatrix() {
+    var k = lang();
+    var caption = table.querySelector("caption");
+    var html = "<tr><th></th>";
+    for (var s = 1; s <= 5; s++) html += "<th>" + s + '<span class="lbl"><br>' + S[s - 1][k] + "</span></th>";
+    html += "</tr>";
+    for (var l = 5; l >= 1; l--) {
+      html += "<tr><th>" + l + '<span class="lbl"><br>' + L[l - 1][k] + "</span></th>";
+      for (var c = 1; c <= 5; c++) {
+        var sc = l * c;
+        html += '<td class="' + level(sc).cls + '" data-l-val="' + l + '" data-s-val="' + c + '">' + sc + "</td>";
+      }
+      html += "</tr>";
+    }
+    table.innerHTML = html;
+    table.insertBefore(caption, table.firstChild);
+  }
+
+  function update() {
+    var k = lang(), l = +lSel.value, s = +sSel.value, score = l * s, lv = level(score);
+    table.querySelectorAll("td").forEach(function (td) {
+      td.classList.toggle("sel", +td.getAttribute("data-l-val") === l && +td.getAttribute("data-s-val") === s);
+    });
+    out.innerHTML =
+      '<div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:8px">' +
+      '<span style="font-size:32px;font-weight:800;color:var(--navy)">' + score + "</span>" +
+      '<span class="level-pill ' + lv.cls + '">' + (k ? lv.ar : lv.en) + "</span></div>" +
+      "<div>" + (k ? lv.actAr : lv.actEn) + "</div>";
+  }
+
+  table.addEventListener("click", function (e) {
+    var td = e.target.closest("td");
+    if (!td) return;
+    lSel.value = td.getAttribute("data-l-val");
+    sSel.value = td.getAttribute("data-s-val");
+    update();
+  });
+  lSel.addEventListener("change", update);
+  sSel.addEventListener("change", update);
+
+  function render() { fillSelects(); buildMatrix(); update(); }
+  document.addEventListener("langchange", render);
+  render();
+
+  // KPI calculator
+  var ids = ["hours", "recordables", "lti", "days"];
+  function num(id) { var v = parseFloat(document.getElementById(id).value); return isNaN(v) || v < 0 ? 0 : v; }
+  function fmt(v) { return v.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 }); }
+  function calc() {
+    var h = num("hours");
+    var set = function (id, v) { document.getElementById(id).textContent = h > 0 ? fmt(v) : "–"; };
+    set("trir", num("recordables") * 200000 / h);
+    set("ltifr", num("lti") * 1000000 / h);
+    set("sr", num("days") * 200000 / h);
+  }
+  ids.forEach(function (id) { document.getElementById(id).addEventListener("input", calc); });
+  calc();
+})();
+</script>
 </body>
 </html>
