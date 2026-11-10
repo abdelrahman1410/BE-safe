@@ -4,6 +4,21 @@
   <meta charset="utf-8">
   <title>BE SAFE | Health, Safety & Environment</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    .card{
+      display:block;
+      text-decoration:none;
+      color:inherit;
+      background:#101a33;
+      padding:22px;
+      border-radius:16px;
+      box-shadow:0 10px 25px rgba(0,0,0,.35);
+      border:1px solid transparent;
+      transition:.2s;
+    }
+    .card:hover{transform:translateY(-2px);border-color:#00d1b2}
+    .card p{opacity:.8}
+  </style>
 </head>
 
 <body style="
@@ -34,40 +49,36 @@
     ">
 
       <!-- Safety Services -->
-      <a href="services/" style="
-        text-decoration:none;
-        color:inherit;
-        background:#101a33;
-        padding:22px;
-        border-radius:16px;
-        box-shadow:0 10px 25px rgba(0,0,0,.35)
-      ">
+      <a class="card" href="services/">
         <h3>🛠 Safety Services</h3>
-        <p style="opacity:.8">
-          Audits, Training & Consultancy
-        </p>
+        <p>Audits, Training & Consultancy</p>
       </a>
 
       <!-- Safety Library -->
-      <a href="library/" style="
-        text-decoration:none;
-        color:inherit;
-        background:#101a33;
-        padding:22px;
-        border-radius:16px;
-        box-shadow:0 10px 25px rgba(0,0,0,.35)
-      ">
+      <a class="card" href="library/">
         <h3>📚 Safety Library</h3>
-        <p style="opacity:.8">
-          PTW, JSA & Risk Assessment
-        </p>
+        <p>PTW, JSA & Risk Assessment</p>
       </a>
 
       <!-- Risk Tools -->
-      <a href="tools/" style="
-        text-decoration:none;
-        color:inherit;
-        background:#101a33;
-        padding:2
+      <a class="card" href="tools/">
+        <h3>📊 Risk Tools</h3>
+        <p>Matrices & Calculators</p>
+      </a>
 
-         
+      <!-- Request Service -->
+      <a class="card" href="request/">
+        <h3>📞 Request Service</h3>
+        <p>Contact & WhatsApp</p>
+      </a>
+
+    </div>
+
+    <p style="opacity:.65;font-size:14px;margin-top:40px">
+      © BE SAFE – Safety Solutions
+    </p>
+
+  </div>
+
+</body>
+</html>
