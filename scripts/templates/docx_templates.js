@@ -232,8 +232,11 @@ function gasTable(W, limits) {
   return [...sectionBar(W, null, "Gas test results", "نتائج فحص الغازات"), table(w, [head, ...rows]), ...note("Limits shown are common values. Use your site procedure and calibrated detectors (bump-tested before use).", "الحدود المذكورة قيم شائعة. اتبع إجراءات موقعك واستخدم أجهزة معايرة ومفحوصة قبل الاستخدام.")];
 }
 
+module.exports = { en, ar, box, pEn, pAr, bi, empty, spacer, cell, table, row, sectionBar, fields, options, checklist, grid, textBox, signoff, ppe, note, build, NAVY, ORANGE, LIGHT, LINE, GREY, AlignmentType, VerticalAlign, TextRun, Paragraph };
+
 // ---------- documents ----------
 const docs = [];
+if (require.main === module) {
 
 // PTW – Hot Work
 docs.push(build("BE-SAFE_PTW_Hot-Work.docx", { code: "BS-PTW-01", title: "Hot Work Permit", titleAr: "تصريح الأعمال الساخنة", intro: "For welding, cutting, grinding, brazing and any work that produces sparks, flame or heat.", introAr: "لأعمال اللحام والقطع والتجليخ واللحام بالنحاس وأي عمل ينتج عنه شرر أو لهب أو حرارة." }, (W) => [
@@ -485,3 +488,4 @@ docs.push(build("BE-SAFE_Root-Cause-5-Whys.docx", { code: "BS-IR-03", title: "Ro
 ]));
 
 Promise.all(docs).then(() => console.log("done"));
+}
