@@ -69,7 +69,10 @@ function toolboxTalk(file, code, title, titleAr, key, hazardsTitle, hazards, rul
   ]);
 }
 
+module.exports = { toolboxTalk, points };
+
 const files = [];
+if (require.main === module) {
 
 files.push(toolboxTalk("BE-SAFE_TBT_Heat-Stress.docx", "BS-TBT-01", "Heat Stress", "الإجهاد الحراري",
   ["Heat illness can kill, and it is preventable: water, rest and shade.", "الإجهاد الحراري قد يقتل، ويمكن الوقاية منه: الماء والراحة والظل."],
@@ -325,3 +328,4 @@ files.push(build("BE-SAFE_Plan_Method-Statement-Template.docx", { code: "BS-PLN-
 ]));
 
 Promise.all(files).then(() => console.log("done"));
+}
