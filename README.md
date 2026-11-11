@@ -13,7 +13,7 @@ Personal HSE website of **Abdul Rahman Zain**, Senior HSE Professional: profile,
 | `tools/` | Interactive 5×5 risk matrix and safety KPI calculator (TRIR, LTIFR, severity rate) |
 | `request/` | Contact form that sends the message on WhatsApp |
 | `assets/` | Shared design (`style.css`) and header, footer and Arabic/English switch (`site.js`) |
-| `scripts/templates/` | Generators for the library templates (from the repo root: `node scripts/templates/docx_templates.js .`, `node scripts/templates/docx_guides.js .`, `node scripts/templates/docx_tbt.js .` and `python3 scripts/templates/xlsx_templates.py .`) |
+| `scripts/templates/` | Generators for the library templates (from the repo root: `node scripts/templates/docx_templates.js .`, `node scripts/templates/docx_guides.js .`, `node scripts/templates/docx_tbt.js .` and `python3 scripts/templates/xlsx_templates.py .`). The Word generators run `fix_pagination.py` on each file so section titles stay with their content and short tables are not split across pages |
 | `app/` | Installable mobile app (PWA): `manifest.json`, `sw.js`, icons |
 
 ## Run locally

@@ -192,7 +192,13 @@ function build(file, meta, bodyFn, o = {}) {
       children: [...title, ...bodyFn(W)],
     }],
   });
-  return Packer.toBuffer(doc).then(buf => { fs.writeFileSync(path.join(OUT, file), buf); console.log("wrote", file); });
+  return Packer.toBuffer(doc).then(buf => {
+    const out = path.join(OUT, file);
+    fs.writeFileSync(out, buf);
+    // Keep section titles with their content and avoid split tables (see fix_pagination.py)
+    require("child_process").execFileSync("python3", [path.join(__dirname, "fix_pagination.py"), out]);
+    console.log("wrote", file);
+  });
 }
 
 // ---------- shared PTW parts ----------
@@ -214,9 +220,8 @@ const ptwAttachments = (W, list) => [
 ];
 const ptwAuth = (W) => [
   ...sectionBar(W, null, "Authorization", "الاعتماد"),
-  pEn("By signing, each person confirms that the precautions above are in place and understood.", { italics: true, color: GREY, size: 15 }),
-  pAr("بالتوقيع، يؤكد كل شخص أن الاحتياطات أعلاه مطبّقة ومفهومة.", { italics: true, color: GREY, size: 14, after: 60 }),
   signoff(W, [["Permit receiver (supervisor)", "مستلم التصريح (المشرف)"], ["Permit issuer", "مُصدر التصريح"], ["HSE representative", "ممثل السلامة"], ["Area authority (if required)", "مسؤول المنطقة (عند الحاجة)"]]),
+  ...note("By signing, each person confirms that the precautions above are in place and understood.", "بالتوقيع، يؤكد كل شخص أن الاحتياطات أعلاه مطبّقة ومفهومة."),
 ];
 const ptwExtension = (W) => [
   ...sectionBar(W, null, "Extension (next shift)", "التمديد (الوردية التالية)"),
@@ -473,11 +478,10 @@ docs.push(build("BE-SAFE_JSA-Form.docx", { code: "BS-RA-01", title: "Job Safety 
   }),
   ...note("Risk levels: 1–4 Low · 5–9 Medium · 10–16 High · 20–25 Extreme. Do not start work with a High or Extreme residual risk.", "مستويات الخطر: 1–4 منخفض · 5–9 متوسط · 10–16 مرتفع · 20–25 شديد جدًا. لا تبدأ العمل إذا كان الخطر المتبقي مرتفعًا أو شديدًا جدًا."),
   ...sectionBar(W, 3, "Required PPE & permits", "معدات الوقاية والتصاريح المطلوبة"),
-  table([W], [row([cell(options([["Helmet", "خوذة"], ["Safety shoes", "حذاء سلامة"], ["Gloves", "قفازات"], ["Glasses", "نظارات"], ["Harness", "حزام أمان"], ["Respirator", "كمامة"], ["Hot work permit", "تصريح أعمال ساخنة"], ["Confined space permit", "تصريح مكان مغلق"], ["Work at height permit", "تصريح عمل على ارتفاع"], ["Electrical isolation", "عزل كهربائي"], ["Excavation permit", "تصريح حفر"], ["Lifting plan", "خطة رفع"]], 6), W)])]),
+  table([W], [row([cell(options([["Helmet", "خوذة"], ["Safety shoes", "حذاء سلامة"], ["Gloves", "قفازات"], ["Glasses", "نظارات"], ["Harness", "حزام أمان"], ["Respirator", "كمامة"], ["Hot work permit", "تصريح أعمال ساخنة"], ["Confined space permit", "تصريح مكان مغلق"], ["Work at height permit", "تصريح عمل على ارتفاع"], ["Electrical isolation", "عزل كهربائي"], ["Excavation permit", "تصريح حفر"], ["Lifting plan", "خطة رفع"]], 4), W)])]),
   ...sectionBar(W, 4, "Team briefing", "إحاطة فريق العمل"),
-  pEn("I have been briefed on this JSA and understand the hazards and controls.", { italics: true, color: GREY, size: 15 }),
-  pAr("تم إطلاعي على هذا التحليل وأفهم المخاطر وإجراءات التحكم.", { italics: true, color: GREY, size: 14, after: 60 }),
   grid([["Name", "الاسم", 3200], ["Job title", "المهنة", 2400], ["Signature", "التوقيع", 1968], ["Name", "الاسم", 3200], ["Job title", "المهنة", 2400], ["Signature", "التوقيع", W - 3200 - 2400 - 1968 - 3200 - 2400]], 5, { height: 420 }),
+  ...note("By signing, I confirm I have been briefed on this JSA and understand the hazards and controls.", "بالتوقيع، أؤكد أنه تم إطلاعي على هذا التحليل وأفهم المخاطر وإجراءات التحكم."),
   ...sectionBar(W, 5, "Approval", "الاعتماد"),
   signoff(W, [["Supervisor", "المشرف"], ["HSE", "السلامة"], ["Site / project manager", "مدير الموقع / المشروع"]]),
 ], { landscape: true }));

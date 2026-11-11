@@ -597,6 +597,9 @@ def statistics(path):
     chart.series[1].tx = SeriesLabel(v="LTIFR")
     chart.set_categories(Reference(ws, min_col=1, min_row=first, max_row=end))
     ws.add_chart(chart, f"A{tr + 2}")
+    # Print the chart on its own page instead of splitting it
+    from openpyxl.worksheet.pagebreak import Break
+    ws.row_breaks.append(Break(id=tr + 1))
     r = tr + 18
     r = signoff(ws, r, last, ["Prepared by / إعداد", "Reviewed by / مراجعة"])
     footer(ws, r, last)
@@ -670,6 +673,12 @@ GENERAL = [
 
 def main():
     os.makedirs(OUT, exist_ok=True)
+    only = [x for x in (sys.argv[2] if len(sys.argv) > 2 else "").split(",") if x]
+    if only:  # rebuild selected files only, e.g. "Statistics"
+        if any(o in "Monthly-HSE-Statistics" for o in only):
+            statistics(os.path.join(OUT, "BE-SAFE_Monthly-HSE-Statistics.xlsx"))
+        print("done")
+        return
     risk_register(os.path.join(OUT, "BE-SAFE_Risk-Assessment-Register.xlsx"))
     risk_matrix(os.path.join(OUT, "BE-SAFE_Risk-Matrix-5x5.xlsx"))
     checklist(os.path.join(OUT, "BE-SAFE_Checklist_Scaffolding.xlsx"), "BS-CL-01", "Scaffolding Inspection Checklist", "قائمة فحص السقالات",
