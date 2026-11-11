@@ -149,7 +149,11 @@ function note(text, arText) {
 }
 
 // ---------- document shell ----------
+// Optional filter: node docx_templates.js <repo> <part1,part2>  builds only files whose name contains one of the parts
+const ONLY = (process.argv[3] || "").split(",").filter(Boolean);
+
 function build(file, meta, bodyFn, o = {}) {
+  if (ONLY.length && !ONLY.some(p => file.includes(p))) return Promise.resolve();
   const landscape = !!o.landscape;
   const pageW = 11906, pageH = 16838, margin = 851;
   const W = (landscape ? pageH : pageW) - 2 * margin;
@@ -320,30 +324,116 @@ docs.push(build("BE-SAFE_PTW_Work-at-Height.docx", { code: "BS-PTW-03", title: "
   ...ptwClosure(W, [["Work completed", "اكتمل العمل"], ["Tools and materials removed from height", "إزالة الأدوات والمواد من الأعلى"], ["Openings re-covered / edge protection restored", "إعادة تغطية الفتحات / إعادة حماية الحواف"], ["Barricades removed safely", "إزالة الحواجز بأمان"], ["Permit returned to issuer", "إعادة التصريح للمُصدر"]]),
 ]));
 
-// PTW – Electrical Isolation (LOTO)
-docs.push(build("BE-SAFE_PTW_Electrical-Isolation-LOTO.docx", { code: "BS-PTW-04", title: "Electrical Isolation Permit (LOTO)", titleAr: "تصريح العزل الكهربائي (القفل والوسم)", intro: "For work on electrical equipment and systems, and any equipment with hazardous energy.", introAr: "للعمل على المعدات والأنظمة الكهربائية وأي معدات بها طاقة خطرة." }, (W) => [
-  ...ptwDetails(W, [["Equipment / panel", "المعدة / اللوحة"], ["Voltage", "الجهد"]]),
+// PTW – Energy Isolation Certificate (LOTO)
+docs.push(build("BE-SAFE_PTW_Energy-Isolation-LOTO.docx", { code: "BS-PTW-04", title: "Energy Isolation Certificate (LOTO)", titleAr: "شهادة عزل الطاقة (القفل والوسم)", intro: "For isolating all hazardous energy (electrical, mechanical, hydraulic, pneumatic, process) before work. Attach it to the related work permit.", introAr: "لعزل جميع مصادر الطاقة الخطرة (كهربائية، ميكانيكية، هيدروليكية، هوائية، خطوط تشغيل) قبل العمل. تُرفق مع تصريح العمل المرتبط." }, (W) => [
+  ...ptwDetails(W, [["Equipment / system", "المعدة / النظام"], ["Related permit No.", "رقم التصريح المرتبط"]]),
   ...sectionBar(W, 2, "Isolation points", "نقاط العزل"),
-  grid([["Isolation point / equipment", "نقطة العزل / المعدة", 2700], ["Method (breaker, fuse, valve)", "الطريقة (قاطع، فيوز، صمام)", 2100], ["Lock No.", "رقم القفل", 1100], ["Tag No.", "رقم البطاقة", 1100], ["Isolated by", "عزل بواسطة", Math.floor((W - 7000) / 2)], ["Verified by", "تحقق بواسطة", W - 7000 - Math.floor((W - 7000) / 2)]], 5, { height: 420 }),
+  grid([["Isolation point / equipment", "نقطة العزل / المعدة", 2700], ["Energy & method (breaker, valve, blind)", "الطاقة والطريقة (قاطع، صمام، لوح أعمى)", 2100], ["Lock No.", "رقم القفل", 1100], ["Tag No.", "رقم البطاقة", 1100], ["Isolated by", "عزل بواسطة", Math.floor((W - 7000) / 2)], ["Verified by", "تحقق بواسطة", W - 7000 - Math.floor((W - 7000) / 2)]], 6, { height: 420 }),
+  ...sectionBar(W, 3, "Isolation checklist", "قائمة التحقق من العزل"),
+  checklist(W, [
+    ["All energy sources identified (electrical, stored, mechanical, hydraulic, pneumatic, process lines)", "تحديد جميع مصادر الطاقة (كهربائية، مخزنة، ميكانيكية، هيدروليكية، هوائية، خطوط التشغيل)"],
+    ["Isolation points checked against drawings (single-line diagrams, P&IDs)", "مطابقة نقاط العزل مع المخططات (المخططات أحادية الخط، مخططات الأنابيب والأجهزة)"],
+    ["Equipment shut down by the normal stop procedure", "إيقاف المعدة بإجراء الإيقاف المعتاد"],
+    ["Isolation points opened / closed and locked with personal locks", "فتح / غلق نقاط العزل وقفلها بأقفال شخصية"],
+    ["Danger tags attached with name, date and reason", "تعليق بطاقات الخطر بالاسم والتاريخ والسبب"],
+    ["Lines drained, depressurized and vented; blinds or double block and bleed fitted where required", "تصريف الخطوط وتفريغ الضغط والتهوية؛ تركيب ألواح عمياء أو عزل مزدوج مع تصريف عند الحاجة"],
+    ["Stored energy released (capacitors discharged, springs released, moving parts blocked)", "تفريغ الطاقة المخزنة (تفريغ المكثفات، تحرير النوابض، تثبيت الأجزاء المتحركة)"],
+    ["Zero energy verified: try-start and test-before-touch with a proven tester", "التحقق من انعدام الطاقة: محاولة التشغيل والفحص قبل اللمس بجهاز مُختبر"],
+    ["Each worker applied a personal lock (group lock box where used)", "كل عامل وضع قفله الشخصي (صندوق القفل الجماعي عند استخدامه)"],
+    ["Isolations done only by authorized, competent persons", "تنفيذ العزل بواسطة أشخاص مؤهلين ومصرح لهم فقط"],
+    ["Isolation status displayed at the work location / isolation register updated", "عرض حالة العزل في موقع العمل / تحديث سجل العزل"],
+    ["De-isolation and re-energization procedure agreed with the area authority", "الاتفاق على إجراء فك العزل وإعادة التشغيل مع مسؤول المنطقة"],
+  ]),
+  ...ptwAuth(W),
+  ...ptwClosure(W, [["Work completed and tested", "اكتمل العمل وتم اختباره"], ["All persons clear of the equipment", "ابتعاد جميع الأشخاص عن المعدة"], ["Guards, covers and blinds restored", "إعادة الحواجز والأغطية وإزالة الألواح العمياء"], ["Locks and tags removed by their owners", "إزالة الأقفال والبطاقات بواسطة أصحابها"], ["Equipment de-isolated and handed back", "فك العزل وتسليم المعدة"], ["Isolation register closed", "إغلاق سجل العزل"]]),
+]));
+
+// PTW – Electrical Work
+docs.push(build("BE-SAFE_PTW_Electrical-Work.docx", { code: "BS-PTW-06", title: "Electrical Work Permit", titleAr: "تصريح الأعمال الكهربائية", intro: "For work on or near electrical equipment and systems, including testing. Work de-energized whenever possible; live work needs separate justification and approval.", introAr: "للعمل على المعدات والأنظمة الكهربائية أو بالقرب منها، بما في ذلك الاختبارات. نفّذ العمل بعد فصل التيار كلما أمكن؛ والعمل على أجزاء حية يحتاج مبررًا واعتمادًا منفصلًا." }, (W) => [
+  ...ptwDetails(W, [["Equipment / panel", "المعدة / اللوحة"], ["Voltage", "الجهد"], ["Isolation certificate No.", "رقم شهادة العزل"], ["Authorized electrician", "الكهربائي المصرح له"]]),
+  ...sectionBar(W, null, "Type of work", "نوع العمل"),
+  table([W], [row([cell(options([["De-energized work", "عمل بعد فصل التيار"], ["Live (energized) work", "عمل على أجزاء حية"], ["Testing / fault finding", "اختبار / تحديد أعطال"], ["Commissioning", "تشغيل تجريبي"], ["Work near overhead lines", "عمل قرب خطوط هوائية"], ["Other", "أخرى"]], 3), W)])]),
+  ...ptwAttachments(W, [["JSA / Risk assessment", "تحليل سلامة المهام / تقييم المخاطر"], ["Energy isolation certificate", "شهادة عزل الطاقة"], ["Single-line diagram", "المخطط أحادي الخط"], ["Live work justification", "مبرر العمل على أجزاء حية"], ["Test procedure", "إجراء الاختبار"], ["Other", "أخرى"]]),
+  ...sectionBar(W, 2, "Precautions checklist", "قائمة الاحتياطات"),
+  checklist(W, [
+    ["Work planned de-energized; energy isolation certificate attached", "العمل مخطط بعد فصل التيار؛ شهادة عزل الطاقة مرفقة"],
+    ["Absence of voltage verified with a proven tester (test before touch)", "التحقق من انعدام الجهد بجهاز مُختبر (الفحص قبل اللمس)"],
+    ["Live work only if justified, risk assessed and approved by management", "العمل على أجزاء حية فقط بمبرر وتقييم مخاطر واعتماد الإدارة"],
+    ["Shock and arc-flash boundaries set and barricaded", "تحديد حدود الصعق والقوس الكهربائي وتطويقها"],
+    ["Only qualified, authorized electricians do the work", "تنفيذ العمل بواسطة كهربائيين مؤهلين ومصرح لهم فقط"],
+    ["Insulated tools and correctly rated test instruments used", "استخدام أدوات معزولة وأجهزة قياس بالتصنيف المناسب"],
+    ["Arc-rated PPE suitable for the arc-flash category", "معدات وقاية مقاومة للقوس مناسبة لفئة الخطر"],
+    ["Rubber insulating mats in place", "وضع سجاد مطاطي عازل"],
+    ["Safety watcher present for live work", "وجود مراقب سلامة أثناء العمل على أجزاء حية"],
+    ["Temporary earths applied where required", "تركيب التأريض المؤقت عند الحاجة"],
+    ["Rescue arrangements ready (insulated rescue hook, CPR-trained person)", "ترتيبات الإنقاذ جاهزة (خطاف إنقاذ معزول، شخص مدرب على الإنعاش)"],
+    ["Panel doors and covers controlled; warning signs posted", "التحكم في أبواب وأغطية اللوحات؛ تعليق لافتات التحذير"],
+  ]),
+  ...sectionBar(W, 3, "Required PPE", "معدات الوقاية المطلوبة"),
+  ppe(W, [["Arc-rated clothing / suit", "ملابس / بدلة مقاومة للقوس"], ["Insulated gloves with leather protectors", "قفازات معزولة مع واقيات جلدية"], ["Arc face shield / hood", "واقي وجه / قناع للقوس"], ["Helmet (electrical class)", "خوذة (فئة كهربائية)"], ["EH safety shoes", "حذاء عازل"], ["Safety glasses", "نظارات سلامة"]]),
+  ...ptwAuth(W),
+  ...ptwClosure(W, [["Work completed and tested", "اكتمل العمل وتم اختباره"], ["Tools and materials removed", "إزالة الأدوات والمواد"], ["Covers and doors closed", "إغلاق الأغطية والأبواب"], ["Temporary earths removed", "إزالة التأريض المؤقت"], ["Isolation certificate returned for de-isolation", "إعادة شهادة العزل لفك العزل"], ["Permit returned to issuer", "إعادة التصريح للمُصدر"]]),
+]));
+
+// PTW – Cold Work
+docs.push(build("BE-SAFE_PTW_Cold-Work.docx", { code: "BS-PTW-07", title: "Cold Work Permit", titleAr: "تصريح الأعمال الباردة", intro: "For work that does not produce sparks, flame or heat but needs control: maintenance, mechanical work, painting, insulation, cleaning and similar work in operating or restricted areas.", introAr: "للأعمال التي لا ينتج عنها شرر أو لهب أو حرارة لكنها تحتاج إلى ضبط: الصيانة، الأعمال الميكانيكية، الدهان، العزل، التنظيف ونحوها في المناطق التشغيلية أو المقيدة." }, (W) => [
+  ...ptwDetails(W, [["Equipment / system", "المعدة / النظام"], ["Isolation certificate No. (if any)", "رقم شهادة العزل (إن وجدت)"]]),
+  ...ptwAttachments(W, [["JSA / Risk assessment", "تحليل سلامة المهام / تقييم المخاطر"], ["Energy isolation certificate", "شهادة عزل الطاقة"], ["Gas test record", "سجل فحص الغازات"], ["Safety data sheets (SDS)", "صحائف بيانات السلامة"], ["Method statement", "طريقة التنفيذ"], ["Other", "أخرى"]]),
+  ...sectionBar(W, 2, "Precautions checklist", "قائمة الاحتياطات"),
+  checklist(W, [
+    ["Work area inspected; hazards and controls covered in the JSA", "فحص منطقة العمل؛ المخاطر وإجراءات التحكم مذكورة في تحليل سلامة المهام"],
+    ["Equipment isolated, drained and depressurized where required", "عزل المعدة وتصريفها وتفريغ الضغط عند الحاجة"],
+    ["Gas test done where flammable or toxic gases may be present", "إجراء فحص الغاز حيث يُحتمل وجود غازات قابلة للاشتعال أو سامة"],
+    ["Non-sparking tools used in hazardous areas", "استخدام أدوات لا تُحدث شررًا في المناطق الخطرة"],
+    ["Barricades and warning signs in place", "وضع الحواجز واللافتات التحذيرية"],
+    ["Safe access and adequate lighting", "وسيلة وصول آمنة وإضاءة كافية"],
+    ["Chemicals: SDS available, correct storage and handling", "الكيماويات: صحائف بيانات السلامة متوفرة، والتخزين والمناولة صحيحان"],
+    ["Spill kit and drip trays available", "توفر حقيبة الانسكاب وصواني التجميع"],
+    ["Noise and dust controls in place", "تطبيق إجراءات التحكم في الضوضاء والغبار"],
+    ["Other work in the same area coordinated (simultaneous operations)", "التنسيق مع الأعمال الأخرى في نفس المنطقة (العمليات المتزامنة)"],
+    ["Workers competent and briefed on the JSA", "العمال مؤهلون وتم إطلاعهم على تحليل سلامة المهام"],
+    ["Waste disposal and housekeeping arranged", "ترتيب التخلص من المخلفات والنظافة"],
+  ]),
+  ...sectionBar(W, 3, "Required PPE", "معدات الوقاية المطلوبة"),
+  ppe(W, [["Safety helmet", "خوذة"], ["Safety shoes", "حذاء سلامة"], ["Gloves", "قفازات"], ["Safety glasses / goggles", "نظارات سلامة / واقية"], ["Coverall", "أفرول"], ["Hi-vis vest", "سترة عاكسة"], ["Hearing protection", "واقي سمع"], ["Dust mask / respirator", "كمامة غبار / تنفس"], ["Other", "أخرى"]]),
+  ...ptwAuth(W),
+  ...ptwExtension(W),
+  ...ptwClosure(W, [["Work completed", "اكتمل العمل"], ["Area inspected and left clean", "تم فحص المنطقة وتنظيفها"], ["Tools, materials and waste removed", "إزالة الأدوات والمواد والمخلفات"], ["Isolations returned for de-isolation", "إعادة العزل لفكه"], ["Permit returned to issuer", "إعادة التصريح للمُصدر"]]),
+]));
+
+// PTW – Lifting
+docs.push(build("BE-SAFE_PTW_Lifting.docx", { code: "BS-PTW-08", title: "Lifting Permit", titleAr: "تصريح أعمال الرفع", intro: "For lifting operations with cranes and other lifting equipment. A critical lift needs a detailed lifting plan approved before the permit is issued.", introAr: "لعمليات الرفع بالرافعات ومعدات الرفع الأخرى. الرفع الحرج يحتاج خطة رفع تفصيلية معتمدة قبل إصدار التصريح." }, (W) => [
+  ...ptwDetails(W, [["Crane / equipment type & ID", "نوع ورقم الرافعة / المعدة"], ["Crane certificate No. & expiry", "رقم شهادة الرافعة وانتهاؤها"], ["Operator & licence No.", "المشغّل ورقم الرخصة"], ["Rigger / signalman", "المُربّط / المُؤشّر"]]),
+  ...sectionBar(W, null, "Lift category", "تصنيف الرفع"),
+  table([W], [row([cell([...options([["Routine lift", "رفع روتيني"], ["Critical lift", "رفع حرج"]], 2), pEn("Critical lift: e.g. load above 75% of crane capacity, tandem lift, lift over occupied areas or live plant, lifting personnel, or a non-routine load.", { italics: true, color: GREY, size: 15 }), pAr("الرفع الحرج: مثل حمل يزيد عن 75% من سعة الرافعة، الرفع بأكثر من رافعة، الرفع فوق مناطق مأهولة أو منشآت عاملة، رفع الأشخاص، أو حمل غير معتاد.", { italics: true, color: GREY, size: 14 })], W)])]),
+  ...sectionBar(W, 2, "Load calculation", "حساب الحمل"),
+  (() => {
+    const lw = 3800, vw = W - lw;
+    return table([lw, vw], [
+      ["Load weight (t)", "وزن الحمل (طن)"], ["Rigging weight: slings, shackles, spreader (t)", "وزن أدوات الربط: أحزمة، شناكل، عارضة (طن)"], ["Hook block weight (t)", "وزن بكرة الخطاف (طن)"], ["Total load (t)", "إجمالي الحمل (طن)"],
+      ["Maximum working radius (m)", "أقصى نصف قطر للعمل (م)"], ["Crane capacity at that radius (t)", "سعة الرافعة عند هذا النصف قطر (طن)"], ["Utilization = total load ÷ capacity × 100 (%)", "نسبة الاستخدام = إجمالي الحمل ÷ السعة × 100 (%)"],
+    ].map(r => row([cell(bi(r[0], r[1], { bold: true, size: 16 }), lw, { fill: LIGHT }), cell(empty(), vw)], { height: 440 })));
+  })(),
+  ...note("Use the manufacturer's load chart for the actual crane configuration (boom length, counterweight, outriggers).", "استخدم جدول الأحمال من الشركة المصنعة حسب إعداد الرافعة الفعلي (طول الذراع، الثقل الموازن، المثبتات)."),
   ...sectionBar(W, 3, "Precautions checklist", "قائمة الاحتياطات"),
   checklist(W, [
-    ["All energy sources identified (electrical, stored, mechanical, hydraulic, pneumatic)", "تحديد جميع مصادر الطاقة (كهربائية، مخزنة، ميكانيكية، هيدروليكية، هوائية)"],
-    ["Equipment shut down by the normal stop procedure", "إيقاف المعدة بإجراء الإيقاف المعتاد"],
-    ["Isolation points opened and locked with personal locks", "فتح نقاط العزل وقفلها بأقفال شخصية"],
-    ["Danger tags attached with name, date and reason", "تعليق بطاقات الخطر بالاسم والتاريخ والسبب"],
-    ["Stored energy released (capacitors discharged, springs released, pressure bled)", "تفريغ الطاقة المخزنة (تفريغ المكثفات، تحرير النوابض، تصريف الضغط)"],
-    ["Zero energy verified: tester checked on a known live source, then test-before-touch", "التحقق من انعدام الطاقة: فحص الجهاز على مصدر حي معروف ثم الفحص قبل اللمس"],
-    ["Earthing / grounding applied where required", "تطبيق التأريض عند الحاجة"],
-    ["Work done only by authorized, competent electricians", "تنفيذ العمل بواسطة كهربائيين مؤهلين ومصرح لهم فقط"],
-    ["Insulated tools and rubber mats used", "استخدام أدوات معزولة وسجاد مطاطي"],
-    ["Barricades and warning signs in place", "وضع الحواجز واللافتات التحذيرية"],
-    ["No live work unless justified and separately authorized", "لا عمل على أجزاء حية إلا بمبرر وتصريح منفصل"],
-    ["Re-energization procedure agreed with the area authority", "الاتفاق على إجراء إعادة التشغيل مع مسؤول المنطقة"],
+    ["Lifting plan approved (critical lift plan for critical lifts)", "خطة الرفع معتمدة (خطة رفع حرج للرفعات الحرجة)"],
+    ["Crane third-party certificate valid; daily pre-use inspection done", "شهادة الطرف الثالث للرافعة سارية؛ الفحص اليومي قبل الاستخدام منجز"],
+    ["Operator certified and competent for this crane", "المشغّل معتمد ومؤهل لهذه الرافعة"],
+    ["Rigger and signalman certified and identified; signals or radio channel agreed", "المُربّط والمُؤشّر معتمدان ومعروفان؛ الاتفاق على الإشارات أو قناة اللاسلكي"],
+    ["Rigging gear inspected, colour-coded and rated for the load", "أدوات الربط مفحوصة وملونة ومناسبة للحمل"],
+    ["Ground assessed; outriggers fully extended on mats", "تقييم الأرض؛ المثبتات ممدودة بالكامل على قواعد"],
+    ["Load moment indicator and limit switches working", "مؤشر عزم الحمل ومفاتيح الحدود تعمل"],
+    ["Exclusion zone barricaded; nobody under the load", "تطويق منطقة الرفع؛ لا أحد تحت الحمل"],
+    ["Tag lines used to control the load", "استخدام حبال التوجيه للتحكم في الحمل"],
+    ["Wind speed and weather within the manufacturer's limits", "سرعة الرياح والطقس ضمن حدود الشركة المصنعة"],
+    ["Safe clearance from power lines and structures", "مسافة آمنة من خطوط الكهرباء والمنشآت"],
+    ["Load secured, centre of gravity known, no loose items on the load", "الحمل مثبت، ومركز الثقل معروف، ولا أشياء سائبة عليه"],
   ]),
   ...sectionBar(W, 4, "Required PPE", "معدات الوقاية المطلوبة"),
-  ppe(W, [["Arc-rated clothing", "ملابس مقاومة للقوس الكهربائي"], ["Insulated gloves", "قفازات معزولة"], ["Arc face shield", "واقي وجه للقوس"], ["Helmet (electrical class)", "خوذة (فئة كهربائية)"], ["EH safety shoes", "حذاء عازل"], ["Safety glasses", "نظارات سلامة"]]),
+  ppe(W, [["Safety helmet", "خوذة"], ["Safety shoes", "حذاء سلامة"], ["Hi-vis vest", "سترة عاكسة"], ["Rigging gloves", "قفازات الربط"], ["Safety glasses", "نظارات سلامة"], ["Radio", "جهاز لاسلكي"]]),
   ...ptwAuth(W),
-  ...ptwClosure(W, [["Work completed and tested", "اكتمل العمل وتم اختباره"], ["All persons clear of the equipment", "ابتعاد جميع الأشخاص عن المعدة"], ["Guards and covers replaced", "إعادة الحواجز والأغطية"], ["Earths removed", "إزالة التأريض المؤقت"], ["Locks and tags removed by their owners", "إزالة الأقفال والبطاقات بواسطة أصحابها"], ["Equipment re-energized and handed back", "إعادة تشغيل المعدة وتسليمها"]]),
+  ...ptwClosure(W, [["Lift completed", "اكتمل الرفع"], ["Load landed and secured", "إنزال الحمل وتثبيته"], ["Rigging gear removed and stored", "فك أدوات الربط وتخزينها"], ["Crane parked safely", "ركن الرافعة بأمان"], ["Barricades removed", "إزالة الحواجز"], ["Permit returned to issuer", "إعادة التصريح للمُصدر"]]),
 ]));
 
 // PTW – Excavation
